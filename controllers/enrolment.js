@@ -24,6 +24,16 @@ module.exports = (db) => {
 	};
 
     /**
+	 * Get students by studentIds
+	 * @param {Array} studentId
+	 * @returns {Promise<any>}
+	 */
+     EnrolmentController.getStudentsByIds = async (ids) => {
+		const students = await StudentModel.findAll({ where: { studentId: ids } });
+		return students;
+	};
+
+    /**
 	 * Get teacher by email
 	 * @param {string} email
 	 * @returns {Promise<any>}
@@ -41,6 +51,16 @@ module.exports = (db) => {
 	EnrolmentController.getTeachersByEmails = async (emails) => {
 		const teachers = await TeacherModel.findAll({ where: { email: emails } });
 		return teachers;
+	};
+
+    /**
+	 * Get enrolments by teacherIds
+	 * @param {Array} teacherId
+	 * @returns {Promise<any>}
+	 */
+	EnrolmentController.getEnrolmentsByTeacherIds = async (ids) => {
+		const enrolments = await EnrolmentModel.findAll({ where: { teacherId: ids } });
+		return enrolments;
 	};
 
     /**

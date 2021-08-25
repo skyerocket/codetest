@@ -42,18 +42,29 @@ module.exports = (db) => {
 	 router.get('/getcommonstudents', async (req, res) => {
 		try {
 			const teacherEmails = Object.keys(req.query);
-			console.log(teacherEmails)
-			// const studentsEmails = req.body.students;
-
-			// if (!teacherEmail) throw new Error('Teacher missing');
-			// if (!studentsEmails || studentsEmails.length === 0) throw new Error('Students missing');
-
-			// await TeacherController.registerStudentsToTeacher(teacherEmail, studentsEmails);
-
-			// return h.api.createApiRes(req, res, 204, 'Students registered to teacher successfully');
+			const teachers = await EnrolmentController.getTeachersByEmails(teacherEmails);
+			const ids = teachers.map(teacher => teacher.dataValues.teacherId)
+			const enrolments = await EnrolmentController.getEnrolmentsByTeacherIds(ids)
+			const studentIds = enrolments.map(enrolment => enrolment.dataValues.studentId)
+			const students = await EnrolmentController.getStudentsByIds(studentIds)
+			//TODO how to use hapi
+			return h.api.createApiRes(req, res, 200, {
+				students: students.map(student => student.dataValues.email)
+			});
 		} catch (err) {
 			return h.api.createApiRes(req, res, 500, err.message);
 		}
+	});
+
+	/**
+	 * @api {post} /api/retrievenotifications
+	 * @apiName Retrieve Notifications
+	 * @apiVersion 1.0.0
+	 * @apiGroup Api
+	 * @apiDescription As a tutor, I want to retrieve a list of students who can receive a given notification.
+	 * @apiParam {String} teacher Teacher's email address
+	 */
+	 router.post('/retrievenotifications', async (req, res) => {
 	});
 
 	return router;
