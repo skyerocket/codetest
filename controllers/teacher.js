@@ -23,16 +23,5 @@ module.exports = (db) => {
 		return teachers;
 	};
 
-	/**
-	 * Register students to teacher
-	 * @param {string} teacherEmail
-	 * @param {string} studentEmails
-	 * @returns {Promise<void>}
-	 */
-	TeacherController.registerStudentsToTeacher = async (teacherEmail, studentEmails) => {
-		const teacher = await TeacherController.getByEmail(teacherEmail);
-		//TODO: add logic here to save student to teacher
-	};
-
 	return TeacherController;
 }

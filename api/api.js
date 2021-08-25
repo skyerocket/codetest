@@ -4,7 +4,7 @@ const h = require('../helpers')
 
 module.exports = (db) => {
 
-	const TeacherController = require('../controllers/teacher')(db);
+	const EnrolmentController = require('../controllers/enrolment')(db);
 
 	/**
 	 * @api {post} /api/register
@@ -23,7 +23,7 @@ module.exports = (db) => {
 			if (!teacherEmail) throw new Error('Teacher missing');
 			if (!studentsEmails || studentsEmails.length === 0) throw new Error('Students missing');
 
-			await TeacherController.registerStudentsToTeacher(teacherEmail, studentsEmails);
+			await EnrolmentController.registerStudentsToTeacher(teacherEmail, studentsEmails);
 
 			return h.api.createApiRes(req, res, 204, 'Students registered to teacher successfully');
 		} catch (err) {
