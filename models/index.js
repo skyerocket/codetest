@@ -51,7 +51,12 @@ module.exports = (db) => {
     sender: { type: Sequelize.STRING, allowNull: false },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE
-  })
+  }, {
+    sequelize: db,
+    freezeTableName: true,
+    modelName: 'enrolment',
+    tableName: 'enrolment'
+  });
 
   return {
     db,
