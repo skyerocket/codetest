@@ -20,7 +20,7 @@ module.exports = (db) => {
   class Student extends Model {}
   Student.init({
     studentId: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-    email: { type: Sequelize.STRING, allowNull: false },
+    email: { type: Sequelize.STRING, allowNull: false, unique: true },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE
   }, {
