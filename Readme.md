@@ -1,4 +1,3 @@
-this is a template create by others
 # Instructions to test project
 Run the following commands in sequence to start node application
 1. `npm run init`
@@ -7,3 +6,4 @@ Run the following commands in sequence to start node application
 4. API docs will be available at `http://localhost:8010/public/docs/api/`
 
 Note: this is making use of sqlite instead of MySQL.
+this is a template created by others
