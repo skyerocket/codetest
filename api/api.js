@@ -48,7 +48,7 @@ module.exports = (db) => {
 			const studentIds = enrolments.map(enrolment => enrolment.dataValues.studentId)
 			const students = await EnrolmentController.getStudentsByIds(studentIds)
 			return h.api.createApiRes(req, res, 200, 'success', {
-				students: students.map(student => student.dataValues.email)
+				students: students.map(student => student.dataValues)
 			});
 		} catch (err) {
 			return h.api.createApiRes(req, res, 500, err.message);
