@@ -24,7 +24,7 @@ export default function Home() {
           />
           <button type="submit">Send</button>
         </form>
-        <div>{students}</div>
+        <div>{students.map(student => <div>{student}</div>)}</div>
       </main>
     </div>
   );
