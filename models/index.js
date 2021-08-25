@@ -17,8 +17,37 @@ module.exports = (db) => {
     tableName: 'teacher'
   });
 
+  class Student extends Model {}
+  Student.init({
+    studentId: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+    email: { type: Sequelize.STRING, allowNull: false },
+    createdAt: Sequelize.DATE,
+    updatedAt: Sequelize.DATE
+  }, {
+    sequelize: db,
+    freezeTableName: true,
+    modelName: 'student',
+    tableName: 'student'
+  });
+
+  class Enrolment extends Model {}
+  Enrolment.init({
+    enrolId: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+    studentId: { type: Sequelize.INTEGER, allowNull: false },
+    teacherId: { type: Sequelize.INTEGER, allowNull: false },
+    createdAt: Sequelize.DATE,
+    updatedAt: Sequelize.DATE
+  }, {
+    sequelize: db,
+    freezeTableName: true,
+    modelName: 'enrolment',
+    tableName: 'enrolment'
+  });
+
   return {
     db,
-    TeacherModel: Teacher
+    TeacherModel: Teacher,
+    StudentModel: Student,
+    EnrolmentModel : Enrolment
   }
 }
