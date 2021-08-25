@@ -51,8 +51,16 @@ module.exports = (db) => {
 	 */
     EnrolmentController.registerStudentsToTeacher = async (teacherEmail, studentEmails) => {
         const teacher = await EnrolmentController.getTeacherByEmail(teacherEmail);
-        console.log(teacher)
-        const students = await EnrolmentController.getStudentsByEmails(studentEmails);
+        const teacherId = teacher.dataValues.teacherId
+        studentEmails.map(async email => {
+            //TODO Prevent duplicates in sequalize
+            const student = await StudentModel.create({email})
+            const studentId = student.dataValues.studentId
+            const enrolment = await EnrolmentModel.create({studentId, teacherId})
+            if (!enrolment?.dataValues) {
+                Error('Problem occured registering')
+            }
+        });
     };
 
     return EnrolmentController;
