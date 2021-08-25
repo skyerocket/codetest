@@ -47,8 +47,7 @@ module.exports = (db) => {
 			const enrolments = await EnrolmentController.getEnrolmentsByTeacherIds(ids)
 			const studentIds = enrolments.map(enrolment => enrolment.dataValues.studentId)
 			const students = await EnrolmentController.getStudentsByIds(studentIds)
-			//TODO how to use hapi
-			return h.api.createApiRes(req, res, 200, {
+			return h.api.createApiRes(req, res, 200, 'success', {
 				students: students.map(student => student.dataValues.email)
 			});
 		} catch (err) {
