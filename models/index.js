@@ -44,10 +44,20 @@ module.exports = (db) => {
     tableName: 'enrolment'
   });
 
+  class Notification extends Model {}
+  Notification.init({
+    notificationId: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+    content: { type: Sequelize.TEXT, allowNull: false },
+    sender: { type: Sequelize.STRING, allowNull: false },
+    createdAt: Sequelize.DATE,
+    updatedAt: Sequelize.DATE
+  })
+
   return {
     db,
     TeacherModel: Teacher,
     StudentModel: Student,
-    EnrolmentModel : Enrolment
+    EnrolmentModel : Enrolment,
+    NotificationModel: Notification
   }
 }

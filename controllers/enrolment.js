@@ -1,5 +1,10 @@
 module.exports = (db) => {
-    const { StudentModel, EnrolmentModel, TeacherModel } = require('../models')(db);
+    const { 
+		StudentModel, 
+		EnrolmentModel, 
+		TeacherModel,
+		NotificationModel
+	 } = require('../models')(db);
 
     let EnrolmentController = {};
 
@@ -81,6 +86,16 @@ module.exports = (db) => {
                 Error('Problem occured registering')
             }
         });
+    };
+
+	/**
+	 * Get students list from teacher notification's mentions and registry lists
+	 * @param {string} teacherEmail
+	 * @param {string} notification
+	 * @returns {Promise<void>}
+	 */
+	 EnrolmentController.getStudentsFromTeacherNotification = async (teacherEmail, notification) => {
+        
     };
 
     return EnrolmentController;
