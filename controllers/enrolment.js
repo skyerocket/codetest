@@ -2,8 +2,7 @@ module.exports = (db) => {
     const { 
 		StudentModel, 
 		EnrolmentModel, 
-		TeacherModel,
-		NotificationModel
+		TeacherModel
 	 } = require('../models')(db);
 
     let EnrolmentController = {};
@@ -93,13 +92,21 @@ module.exports = (db) => {
     };
 
 	/**
-	 * Get students list from teacher notification's mentions and registry lists
+	 * Get students list from teacher email
 	 * @param {string} teacherEmail
-	 * @param {string} notification
 	 * @returns {Promise<void>}
 	 */
-	 EnrolmentController.getStudentsFromTeacherNotification = async (teacherEmail, notification) => {
-        
+	 EnrolmentController.getStudentsByTeacherEmail = async (teacherEmail) => {
+		try {
+			const teacher = await EnrolmentController.getTeacherByEmail(teacherEmail);
+			const teacherId = teacher.dataValues.teacherId
+			const enrolments = await EnrolmentController.getEnrolmentsByTeacherIds([teacherId])
+			const studentIds = enrolments.map(enrolment => enrolment.dataValues.studentId)
+			const students = await EnrolmentController.getStudentsByIds(studentIds)
+			return students
+		} catch(e) {
+			Error(e)
+		}
     };
 
     return EnrolmentController;

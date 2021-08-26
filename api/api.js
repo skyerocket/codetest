@@ -71,14 +71,16 @@ module.exports = (db) => {
 			if (!teacherEmail) throw new Error('Teacher missing');
 			if (!notification || notification.length === 0) throw new Error('Notification missing');
 
-			const recievers = []
+			const recievers = [];
 
+			const students = await EnrolmentController.getStudentsByTeacherEmail(teacherEmail);
+			students.map(student => recievers.push(student.email));
 
 			const regex = /\S+@\S+\.\S+/
 			while (regex.test(notification)) {
-				const mention = regex.exec(notification)[0].substring(1)
-				recievers.push(mention)
-				notification = notification.replace(/\S+@\S+\.\S+/, '')
+				const mention = regex.exec(notification)[0].substring(1);
+				recievers.push(mention);
+				notification = notification.replace(/\S+@\S+\.\S+/, '');
 			}
 
 			console.log(recievers)
