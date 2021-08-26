@@ -64,6 +64,31 @@ module.exports = (db) => {
 	 * @apiParam {String} teacher Teacher's email address
 	 */
 	 router.post('/retrievenotifications', async (req, res) => {
+		try {
+			const teacherEmail = req.body.teacher;
+			let notification = req.body.notification;
+
+			if (!teacherEmail) throw new Error('Teacher missing');
+			if (!notification || notification.length === 0) throw new Error('Notification missing');
+
+			const recievers = []
+
+
+			const regex = /\S+@\S+\.\S+/
+			while (regex.test(notification)) {
+				const mention = regex.exec(notification)[0].substring(1)
+				recievers.push(mention)
+				notification = notification.replace(/\S+@\S+\.\S+/, '')
+			}
+
+			console.log(recievers)
+
+			return h.api.createApiRes(req, res, 200, 'fetched', {
+				recievers
+			});
+		} catch (err) {
+			return h.api.createApiRes(req, res, 500, err.message);
+		}	
 	});
 
 	return router;
