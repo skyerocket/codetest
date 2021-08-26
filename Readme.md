@@ -10,3 +10,5 @@ Run the following commands in sequence to start node application
 Note: this is making use of sqlite instead of MySQL.
 
 this template was created by others
+
+Please test apis using postman collections
