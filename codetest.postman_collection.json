@@ -1,0 +1,88 @@
+{
+	"variables": [],
+	"info": {
+		"name": "codetest",
+		"_postman_id": "0e33d5b9-50db-8943-24d0-6fdf74de4bba",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8010/api/register",
+			"request": {
+				"url": "http://localhost:8010/api/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"teacher\":\"teacher1@gmail.com\",\n\t\"students\":\n\t[\n\t\t\"common_student_5@gmail.com\",\n\t\t\"common_student_6@gmail.com\"\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8010/api/getcommonstudents?teacher1@gmail.com&teacher2@gmail.com",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8010/api/getcommonstudents?teacher1@gmail.com&teacher2@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8010",
+					"path": [
+						"api",
+						"getcommonstudents"
+					],
+					"query": [
+						{
+							"key": "teacher1@gmail.com",
+							"value": "",
+							"equals": false,
+							"description": ""
+						},
+						{
+							"key": "teacher2@gmail.com",
+							"value": "",
+							"equals": false,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8010/api/retrievenotifications",
+			"request": {
+				"url": "http://localhost:8010/api/retrievenotifications",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"teacher\": \"teacher2@gmail.com\",\n\t\"notification\": \"hey! @student1@gmail.com @student2@gmail.com\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
